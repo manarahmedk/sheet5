@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sheet5_app/view/components/chat_widget.dart';
 
 import '../../model/chat_model.dart';
+import '../components/conversation_chat_widget.dart';
 
 class ChatsScreen extends StatefulWidget {
   late Chat chats;
@@ -51,24 +52,74 @@ class _ChatsScreenState extends State<ChatsScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          // SearchBar(
-          // ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView.separated(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    20,
+                  ),
+                  color: Colors.grey,
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    prefixIcon: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 100,
+              child: ListView.separated(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return ChatWidget(
+                    chat: chats[index],
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 10,
+                  );
+                },
+                itemCount: chats.length,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListView.separated(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                return ChatWidget(
+                return ConversationChatWidget(
                   chat: chats[index],
                 );
               },
@@ -79,60 +130,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
               },
               itemCount: chats.length,
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 35,
-                backgroundImage: Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVI8wwjmbk07RHjMaoxGcLQw5kRfAizckn7g&usqp=CAU',
-                ).image,
-                child: Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: CircleAvatar(
-                    radius: 10,
-                    backgroundColor: Colors.green,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'data',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'hello',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                '11:35 PM',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
