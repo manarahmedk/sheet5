@@ -18,10 +18,13 @@ class _ChatsScreenState extends State<ChatsScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        leading: CircleAvatar(
-          backgroundImage: Image.network(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVI8wwjmbk07RHjMaoxGcLQw5kRfAizckn7g&usqp=CAU',
-          ).image,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundImage: Image.network(
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVI8wwjmbk07RHjMaoxGcLQw5kRfAizckn7g&usqp=CAU',
+            ).image,
+          ),
         ),
         title: Text(
           'Chats',
@@ -63,9 +66,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    20,
+                    30,
                   ),
-                  color: Colors.grey,
+                  color: Colors.grey[800],
                 ),
                 child: TextFormField(
                   decoration: InputDecoration(
@@ -83,7 +86,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(20),
+                        Radius.circular(30),
                       ),
                     ),
                   ),

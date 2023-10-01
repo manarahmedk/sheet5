@@ -43,6 +43,9 @@ class ConversationChatWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   chat.messege??'',
                   style: TextStyle(
